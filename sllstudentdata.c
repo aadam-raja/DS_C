@@ -10,7 +10,7 @@ int main()
  { printf("ENTER ROLL NUMBER FOR STUDENT %d ",i+1);
     scanf("%d", &s[i].rollno);
     printf("ENTER NAME FOR STUDENT %d ",i+1);
-    scanf("%s",&s[i].name);
+    scanf("%s",s[i].name);
  }
 for(int i=0;i<4;i++)
 { s[i].next = &s[i+1]; 
