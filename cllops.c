@@ -9,16 +9,16 @@ struct house // skeleton
 
 struct house *addhouse(int value) // creating nodes
 {
-    struct house *newfriend = (struct house *)malloc(sizeof(struct house));
-    newfriend->membercount = value;
-    newfriend->relativeshouseno = NULL;
-    return newfriend;
+    struct house *newhouse = (struct house *)malloc(sizeof(struct house));
+    newhouse->membercount = value;
+    newhouse->relativeshouseno = NULL;
+    return newhouse;
 }
 
-void insertatbeg(struct house **head, struct house *newfriend)
+void insertatbeg(struct house **head, struct house *newhouse)
 {
-    newfriend->relativeshouseno = *head;
-    *head = newfriend;
+    newhouse->relativeshouseno = *head;
+    *head = newhouse;
     struct house *ptr = *head;
     while (ptr->relativeshouseno != *head) // to get last node
     {
@@ -27,26 +27,26 @@ void insertatbeg(struct house **head, struct house *newfriend)
     ptr->relativeshouseno = *head; // to make last node point to new first node
 }
 
-void insertatend(struct house **head, struct house *newfriend)
+void insertatend(struct house **head, struct house *newhouse)
 {
     struct house *ptr = *head;
     while (ptr->relativeshouseno != *head)
     {
         ptr = ptr->relativeshouseno;
     }
-    ptr->relativeshouseno = newfriend;
-    newfriend->relativeshouseno = *head;
+    ptr->relativeshouseno = newhouse;
+    newhouse->relativeshouseno = *head;
 }
 
-void insertatany(struct house **head, struct house *newfriend)
+void insertatany(struct house **head, struct house *newhouse)
 {
     struct house *pointer = *head;
     while (pointer->membercount % 2 != 0)
     {
         pointer = pointer->relativeshouseno;
     }
-    newfriend->relativeshouseno = pointer->relativeshouseno;
-    pointer->relativeshouseno = newfriend;
+    newhouse->relativeshouseno = pointer->relativeshouseno;
+    pointer->relativeshouseno = newhouse;
 }
 
 void deleteatbeg(struct house **head)
@@ -101,7 +101,7 @@ int main()
 {
     struct house *head = NULL;
     struct house *temp = NULL;
-    struct house *newfriend = NULL;
+    struct house *newhouse = NULL;
     int totalfriends, value;
 
     printf("ENTER TOTAL FRIENDS: ");
@@ -112,16 +112,16 @@ int main()
         printf("ENTER ROLL NO OF FRIEND %d: ", i + 1);
         scanf("%d", &value);
 
-        newfriend = addhouse(value);
+        newhouse = addhouse(value);
 
         if (head == NULL)
         {
-            head = newfriend;
+            head = newhouse;
             temp = head;
         }
         else
         {
-            temp->relativeshouseno = newfriend;
+            temp->relativeshouseno = newhouse;
             temp = temp->relativeshouseno;
         }
     }
@@ -130,22 +130,22 @@ int main()
     // Insert at beginning
     printf("ENTER ROLL NO OF FRIEND TO INSERT AT BEGINNING: ");
     scanf("%d", &value);
-    newfriend = addhouse(value);
-    insertatbeg(&head, newfriend);
+    newhouse = addhouse(value);
+    insertatbeg(&head, newhouse);
     traverse(head);
 
     // Insert at end
     printf("ENTER ROLL NO OF FRIEND TO INSERT AT END: ");
     scanf("%d", &value);
-    newfriend = addhouse(value);
-    insertatend(&head, newfriend);
+    newhouse = addhouse(value);
+    insertatend(&head, newhouse);
     traverse(head);
 
     // Insert after first odd rollno
     printf("ENTER ROLL NO OF FRIEND TO INSERT AFTER FIRST ODD ROLL NO: ");
     scanf("%d", &value);
-    newfriend = addhouse(value);
-    insertatany(&head, newfriend);
+    newhouse = addhouse(value);
+    insertatany(&head, newhouse);
     traverse(head);
 
     // Delete at beginning
